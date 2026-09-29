@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Hub</title>
+<style>
+:root {
+  --bg:#080b14; --panel:#111729; --panel2:#171d32; --text:#f5f7ff;
+  --muted:#9ca8c7; --accent:#6c63ff; --accent2:#00d4ff;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; min-height:100vh; color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 10% 0%, #20285b 0, transparent 35%),
+    radial-gradient(circle at 90% 10%, #113e57 0, transparent 30%),
+    var(--bg);
+}
+header {
+  padding:42px 22px 28px; text-align:center;
+}
+header h1 { margin:0; font-size:clamp(32px,5vw,58px); letter-spacing:-2px; }
+header p { color:var(--muted); margin:10px auto 0; max-width:720px; }
+.back {
+  display:inline-block; margin-top:20px; color:#fff; text-decoration:none;
+  padding:10px 16px; border:1px solid #303954; border-radius:999px;
+  background:#11172a;
+}
+.controls { max-width:1250px; margin:0 auto 24px; padding:0 20px; }
+.search {
+  width:100%; padding:16px 20px; border-radius:14px; border:1px solid #303954;
+  background:#0f1424; color:#fff; font-size:16px; outline:none;
+}
+.search:focus { border-color:var(--accent2); box-shadow:0 0 0 3px #00d4ff22; }
+.stats { color:var(--muted); margin:10px 3px; font-size:14px; }
+.grid {
+  max-width:1250px; margin:0 auto; padding:0 20px 60px;
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:18px;
+}
+.game-link { text-decoration:none; color:inherit; }
+.game-card {
+  overflow:hidden; border:1px solid #252d48; border-radius:17px;
+  background:linear-gradient(145deg,var(--panel),var(--panel2));
+  transition:.18s ease; box-shadow:0 10px 25px #0004;
+}
+.game-card:hover { transform:translateY(-5px); border-color:#626cff; box-shadow:0 18px 35px #0008; }
+.thumb { position:relative; aspect-ratio:16/9; background:#0d1220; overflow:hidden; }
+.thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.play {
+  position:absolute; right:10px; bottom:10px; width:38px; height:38px;
+  display:grid; place-items:center; border-radius:50%; background:#ffffffee;
+  color:#101426; font-size:15px; opacity:0; transform:scale(.8); transition:.18s;
+}
+.game-card:hover .play { opacity:1; transform:scale(1); }
+.card-info { padding:13px 14px 15px; }
+.card-info h2 { margin:0 0 7px; font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.type { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.7px; }
+.empty { grid-column:1/-1; text-align:center; padding:50px; color:var(--muted); }
+footer { text-align:center; color:#65708d; padding:0 20px 30px; font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🎮 Game Hub</h1>
+  <p>Browse the games and files in this collection. Click a card to open its linked folder or file.</p>
+  <a class="back" href="../">← Back to Home</a>
+</header>
+
+<section class="controls">
+  <input id="searchBar" class="search" type="search" placeholder="🔎 Search games..." autocomplete="off">
+  <div id="stats" class="stats"></div>
+</section>
+
+<main id="grid" class="grid">
+
+      <a class="game-link" href="./a-game-black-hole">
+        <article class="game-card" data-title="a game black hole">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/a-game-black-hole.png&#x27;,&#x27;../images/a-game-black-hole.png&#x27;,&#x27;../images/a-game-black-hole.jpg&#x27;,&#x27;../images/a-game-black-hole.jpeg&#x27;]'
+                 alt="A Game Black Hole thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">A Game Black Hole</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>A Game Black Hole</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./bad-parenting">
+        <article class="game-card" data-title="bad parenting">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/bad-parenting.png&#x27;,&#x27;../images/bad-parenting.png&#x27;,&#x27;../images/bad-parenting.jpg&#x27;,&#x27;../images/bad-parenting.jpeg&#x27;]'
+                 alt="Bad Parenting thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Bad Parenting</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Bad Parenting</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./bart-blast">
+        <article class="game-card" data-title="bart blast">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/bart-blast.png&#x27;,&#x27;../images/bart-blast.png&#x27;,&#x27;../images/bart-blast.jpg&#x27;,&#x27;../images/bart-blast.jpeg&#x27;]'
+                 alt="Bart Blast thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Bart Blast</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Bart Blast</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./bin">
+        <article class="game-card" data-title="bin">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/bin.png&#x27;,&#x27;../images/bin.png&#x27;,&#x27;../images/bin.jpg&#x27;,&#x27;../images/bin.jpeg&#x27;]'
+                 alt="Bin thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Bin</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Bin</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./blockpost">
+        <article class="game-card" data-title="blockpost">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/blockpost.png&#x27;,&#x27;../images/blockpost.png&#x27;,&#x27;../images/blockpost.jpg&#x27;,&#x27;../images/blockpost.jpeg&#x27;]'
+                 alt="Blockpost thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Blockpost</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Blockpost</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./brawl-3d">
+        <article class="game-card" data-title="brawl 3d">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/brawl-3d.png&#x27;,&#x27;../images/brawl-3d.png&#x27;,&#x27;../images/brawl-3d.jpg&#x27;,&#x27;../images/brawl-3d.jpeg&#x27;]'
+                 alt="Brawl 3D thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Brawl 3D</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Brawl 3D</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./btd6">
+        <article class="game-card" data-title="bloons td 6">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/btd6.png&#x27;,&#x27;../images/btd6.png&#x27;,&#x27;../images/btd6.jpg&#x27;,&#x27;../images/btd6.jpeg&#x27;]'
+                 alt="Bloons TD 6 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Bloons TD 6</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Bloons TD 6</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./buckshot-roulette">
+        <article class="game-card" data-title="buckshot roulette">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/buckshot-roulette.png&#x27;,&#x27;../images/buckshot-roulette.png&#x27;,&#x27;../images/buckshot-roulette.jpg&#x27;,&#x27;../images/buckshot-roulette.jpeg&#x27;]'
+                 alt="Buckshot Roulette thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Buckshot Roulette</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Buckshot Roulette</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./cc3d">
+        <article class="game-card" data-title="crazy cattle 3d">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/cc3d.png&#x27;,&#x27;../images/cc3d.png&#x27;,&#x27;../images/cc3d.jpg&#x27;,&#x27;../images/cc3d.jpeg&#x27;]'
+                 alt="Crazy Cattle 3D thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Crazy Cattle 3D</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Crazy Cattle 3D</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./cluster-rush">
+        <article class="game-card" data-title="cluster rush">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/cluster-rush.png&#x27;,&#x27;../images/cluster-rush.png&#x27;,&#x27;../images/cluster-rush.jpg&#x27;,&#x27;../images/cluster-rush.jpeg&#x27;]'
+                 alt="Cluster Rush thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Cluster Rush</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Cluster Rush</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./color-pencil-run">
+        <article class="game-card" data-title="color pencil run">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/color-pencil-run.png&#x27;,&#x27;../images/color-pencil-run.png&#x27;,&#x27;../images/color-pencil-run.jpg&#x27;,&#x27;../images/color-pencil-run.jpeg&#x27;]'
+                 alt="Color Pencil Run thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Color Pencil Run</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Color Pencil Run</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./coreball">
+        <article class="game-card" data-title="coreball">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/coreball.png&#x27;,&#x27;../images/coreball.png&#x27;,&#x27;../images/coreball.jpg&#x27;,&#x27;../images/coreball.jpeg&#x27;]'
+                 alt="Coreball thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Coreball</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Coreball</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./crazycattle3d">
+        <article class="game-card" data-title="crazycattle3d">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/crazycattle3d.png&#x27;,&#x27;../images/crazycattle3d.png&#x27;,&#x27;../images/crazycattle3d.jpg&#x27;,&#x27;../images/crazycattle3d.jpeg&#x27;]'
+                 alt="Crazycattle3d thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Crazycattle3d</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Crazycattle3d</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./crossy-road">
+        <article class="game-card" data-title="crossy road">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/crossy-road.png&#x27;,&#x27;../images/crossy-road.png&#x27;,&#x27;../images/crossy-road.jpg&#x27;,&#x27;../images/crossy-road.jpeg&#x27;]'
+                 alt="Crossy Road thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Crossy Road</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Crossy Road</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./cubes2048">
+        <article class="game-card" data-title="cubes2048">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/cubes2048.png&#x27;,&#x27;../images/cubes2048.png&#x27;,&#x27;../images/cubes2048.jpg&#x27;,&#x27;../images/cubes2048.jpeg&#x27;]'
+                 alt="Cubes2048 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Cubes2048</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Cubes2048</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./driven-wild">
+        <article class="game-card" data-title="driven wild">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/driven-wild.png&#x27;,&#x27;../images/driven-wild.png&#x27;,&#x27;../images/driven-wild.jpg&#x27;,&#x27;../images/driven-wild.jpeg&#x27;]'
+                 alt="Driven Wild thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Driven Wild</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Driven Wild</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./emu">
+        <article class="game-card" data-title="emu">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/emu.png&#x27;,&#x27;../images/emu.png&#x27;,&#x27;../images/emu.jpg&#x27;,&#x27;../images/emu.jpeg&#x27;]'
+                 alt="Emu thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Emu</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Emu</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./escape-road-city-2">
+        <article class="game-card" data-title="escape road city 2">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/escape-road-city-2.png&#x27;,&#x27;../images/escape-road-city-2.png&#x27;,&#x27;../images/escape-road-city-2.jpg&#x27;,&#x27;../images/escape-road-city-2.jpeg&#x27;]'
+                 alt="Escape Road City 2 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Escape Road City 2</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Escape Road City 2</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./escaperoad2">
+        <article class="game-card" data-title="escaperoad2">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/escaperoad2.png&#x27;,&#x27;../images/escaperoad2.png&#x27;,&#x27;../images/escaperoad2.jpg&#x27;,&#x27;../images/escaperoad2.jpeg&#x27;]'
+                 alt="Escaperoad2 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Escaperoad2</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Escaperoad2</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./gdlite">
+        <article class="game-card" data-title="geometry dash lite">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/gdlite.png&#x27;,&#x27;../images/gdlite.png&#x27;,&#x27;../images/gdlite.jpg&#x27;,&#x27;../images/gdlite.jpeg&#x27;]'
+                 alt="Geometry Dash Lite thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Geometry Dash Lite</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Geometry Dash Lite</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./jetpack-joyride">
+        <article class="game-card" data-title="jetpack joyride">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/jetpack-joyride.png&#x27;,&#x27;../images/jetpack-joyride.png&#x27;,&#x27;../images/jetpack-joyride.jpg&#x27;,&#x27;../images/jetpack-joyride.jpeg&#x27;]'
+                 alt="Jetpack Joyride thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Jetpack Joyride</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Jetpack Joyride</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./melon-playground">
+        <article class="game-card" data-title="melon playground">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/melon-playground.png&#x27;,&#x27;../images/melon-playground.png&#x27;,&#x27;../images/melon-playground.jpg&#x27;,&#x27;../images/melon-playground.jpeg&#x27;]'
+                 alt="Melon Playground thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Melon Playground</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Melon Playground</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./monster-tracks">
+        <article class="game-card" data-title="monster tracks">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/monster-tracks.png&#x27;,&#x27;../images/monster-tracks.png&#x27;,&#x27;../images/monster-tracks.jpg&#x27;,&#x27;../images/monster-tracks.jpeg&#x27;]'
+                 alt="Monster Tracks thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Monster Tracks</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Monster Tracks</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./nazi-zombies-portable">
+        <article class="game-card" data-title="nazi zombies portable">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/nazi-zombies-portable.png&#x27;,&#x27;../images/nazi-zombies-portable.png&#x27;,&#x27;../images/nazi-zombies-portable.jpg&#x27;,&#x27;../images/nazi-zombies-portable.jpeg&#x27;]'
+                 alt="Nazi Zombies Portable thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Nazi Zombies Portable</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Nazi Zombies Portable</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./nova-craft">
+        <article class="game-card" data-title="nova craft">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/nova-craft.png&#x27;,&#x27;../images/nova-craft.png&#x27;,&#x27;../images/nova-craft.jpg&#x27;,&#x27;../images/nova-craft.jpeg&#x27;]'
+                 alt="Nova Craft thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Nova Craft</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Nova Craft</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./ragdoll-hit">
+        <article class="game-card" data-title="ragdoll hit">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/ragdoll-hit.png&#x27;,&#x27;../images/ragdoll-hit.png&#x27;,&#x27;../images/ragdoll-hit.jpg&#x27;,&#x27;../images/ragdoll-hit.jpeg&#x27;]'
+                 alt="Ragdoll Hit thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Ragdoll Hit</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Ragdoll Hit</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./repo">
+        <article class="game-card" data-title="repo">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/repo.png&#x27;,&#x27;../images/repo.png&#x27;,&#x27;../images/repo.jpg&#x27;,&#x27;../images/repo.jpeg&#x27;]'
+                 alt="Repo thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Repo</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Repo</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./retrobowlcollege">
+        <article class="game-card" data-title="retrobowlcollege">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/retrobowlcollege.png&#x27;,&#x27;../images/retrobowlcollege.png&#x27;,&#x27;../images/retrobowlcollege.jpg&#x27;,&#x27;../images/retrobowlcollege.jpeg&#x27;]'
+                 alt="Retrobowlcollege thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Retrobowlcollege</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Retrobowlcollege</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./shapezio">
+        <article class="game-card" data-title="shapezio">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/shapezio.png&#x27;,&#x27;../images/shapezio.png&#x27;,&#x27;../images/shapezio.jpg&#x27;,&#x27;../images/shapezio.jpeg&#x27;]'
+                 alt="Shapezio thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Shapezio</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Shapezio</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./shredsauce">
+        <article class="game-card" data-title="shredsauce">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/shredsauce.png&#x27;,&#x27;../images/shredsauce.png&#x27;,&#x27;../images/shredsauce.jpg&#x27;,&#x27;../images/shredsauce.jpeg&#x27;]'
+                 alt="Shredsauce thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Shredsauce</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Shredsauce</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./slope">
+        <article class="game-card" data-title="slope">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/slope.png&#x27;,&#x27;../images/slope.png&#x27;,&#x27;../images/slope.jpg&#x27;,&#x27;../images/slope.jpeg&#x27;]'
+                 alt="Slope thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Slope</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Slope</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./stickman-hook">
+        <article class="game-card" data-title="stickman hook">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/stickman-hook.png&#x27;,&#x27;../images/stickman-hook.png&#x27;,&#x27;../images/stickman-hook.jpg&#x27;,&#x27;../images/stickman-hook.jpeg&#x27;]'
+                 alt="Stickman Hook thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Stickman Hook</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Stickman Hook</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./swf">
+        <article class="game-card" data-title="flash games">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/swf.png&#x27;,&#x27;../images/swf.png&#x27;,&#x27;../images/swf.jpg&#x27;,&#x27;../images/swf.jpeg&#x27;]'
+                 alt="Flash Games thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Flash Games</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Flash Games</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./temple-run-2">
+        <article class="game-card" data-title="temple run 2">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/temple-run-2.png&#x27;,&#x27;../images/temple-run-2.png&#x27;,&#x27;../images/temple-run-2.jpg&#x27;,&#x27;../images/temple-run-2.jpeg&#x27;]'
+                 alt="Temple Run 2 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Temple Run 2</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Temple Run 2</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./turbo-moto-racer">
+        <article class="game-card" data-title="turbo moto racer">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/turbo-moto-racer.png&#x27;,&#x27;../images/turbo-moto-racer.png&#x27;,&#x27;../images/turbo-moto-racer.jpg&#x27;,&#x27;../images/turbo-moto-racer.jpeg&#x27;]'
+                 alt="Turbo Moto Racer thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Turbo Moto Racer</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Turbo Moto Racer</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./waterworks">
+        <article class="game-card" data-title="waterworks">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/waterworks.png&#x27;,&#x27;../images/waterworks.png&#x27;,&#x27;../images/waterworks.jpg&#x27;,&#x27;../images/waterworks.jpeg&#x27;]'
+                 alt="Waterworks thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Waterworks</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Waterworks</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./winter-clash-3d">
+        <article class="game-card" data-title="winter clash 3d">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/winter-clash-3d.png&#x27;,&#x27;../images/winter-clash-3d.png&#x27;,&#x27;../images/winter-clash-3d.jpg&#x27;,&#x27;../images/winter-clash-3d.jpeg&#x27;]'
+                 alt="Winter Clash 3D thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Winter Clash 3D</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Winter Clash 3D</h2>
+            <span class="type">Game folder</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./1v1.xml">
+        <article class="game-card" data-title="1v1">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/1v1.xml.png&#x27;,&#x27;../images/1v1.png&#x27;,&#x27;../images/1v1.jpg&#x27;,&#x27;../images/1v1.jpeg&#x27;]'
+                 alt="1v1 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">1v1</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>1v1</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./a-dance-of-fire-and-ice.xml">
+        <article class="game-card" data-title="a dance of fire and ice">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/a-dance-of-fire-and-ice.xml.png&#x27;,&#x27;../images/a-dance-of-fire-and-ice.png&#x27;,&#x27;../images/a-dance-of-fire-and-ice.jpg&#x27;,&#x27;../images/a-dance-of-fire-and-ice.jpeg&#x27;]'
+                 alt="A Dance Of Fire And Ice thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">A Dance Of Fire And Ice</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>A Dance Of Fire And Ice</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./achievement-unlocked-2.xml">
+        <article class="game-card" data-title="achievement unlocked 2">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/achievement-unlocked-2.xml.png&#x27;,&#x27;../images/achievement-unlocked-2.png&#x27;,&#x27;../images/achievement-unlocked-2.jpg&#x27;,&#x27;../images/achievement-unlocked-2.jpeg&#x27;]'
+                 alt="Achievement Unlocked 2 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Achievement Unlocked 2</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Achievement Unlocked 2</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./achievement-unlocked-3.xml">
+        <article class="game-card" data-title="achievement unlocked 3">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/achievement-unlocked-3.xml.png&#x27;,&#x27;../images/achievement-unlocked-3.png&#x27;,&#x27;../images/achievement-unlocked-3.jpg&#x27;,&#x27;../images/achievement-unlocked-3.jpeg&#x27;]'
+                 alt="Achievement Unlocked 3 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Achievement Unlocked 3</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Achievement Unlocked 3</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./achievement-unlocked.xml">
+        <article class="game-card" data-title="achievement unlocked">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/achievement-unlocked.xml.png&#x27;,&#x27;../images/achievement-unlocked.png&#x27;,&#x27;../images/achievement-unlocked.jpg&#x27;,&#x27;../images/achievement-unlocked.jpeg&#x27;]'
+                 alt="Achievement Unlocked thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Achievement Unlocked</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Achievement Unlocked</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./angry-birds.xml">
+        <article class="game-card" data-title="angry birds">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/angry-birds.xml.png&#x27;,&#x27;../images/angry-birds.png&#x27;,&#x27;../images/angry-birds.jpg&#x27;,&#x27;../images/angry-birds.jpeg&#x27;]'
+                 alt="Angry Birds thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Angry Birds</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Angry Birds</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./backrooms.xml">
+        <article class="game-card" data-title="backrooms">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/backrooms.xml.png&#x27;,&#x27;../images/backrooms.png&#x27;,&#x27;../images/backrooms.jpg&#x27;,&#x27;../images/backrooms.jpeg&#x27;]'
+                 alt="Backrooms thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Backrooms</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Backrooms</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./baldis-basics.xml">
+        <article class="game-card" data-title="baldis basics">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/baldis-basics.xml.png&#x27;,&#x27;../images/baldis-basics.png&#x27;,&#x27;../images/baldis-basics.jpg&#x27;,&#x27;../images/baldis-basics.jpeg&#x27;]'
+                 alt="Baldis Basics thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Baldis Basics</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Baldis Basics</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./basket-random.xml">
+        <article class="game-card" data-title="basket random">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/basket-random.xml.png&#x27;,&#x27;../images/basket-random.png&#x27;,&#x27;../images/basket-random.jpg&#x27;,&#x27;../images/basket-random.jpeg&#x27;]'
+                 alt="Basket Random thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Basket Random</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Basket Random</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./big-ice-tower-tiny-square.xml">
+        <article class="game-card" data-title="big ice tower tiny square">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/big-ice-tower-tiny-square.xml.png&#x27;,&#x27;../images/big-ice-tower-tiny-square.png&#x27;,&#x27;../images/big-ice-tower-tiny-square.jpg&#x27;,&#x27;../images/big-ice-tower-tiny-square.jpeg&#x27;]'
+                 alt="Big Ice Tower Tiny Square thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Big Ice Tower Tiny Square</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Big Ice Tower Tiny Square</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./big-neon-tower-tiny-square.xml">
+        <article class="game-card" data-title="big neon tower tiny square">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/big-neon-tower-tiny-square.xml.png&#x27;,&#x27;../images/big-neon-tower-tiny-square.png&#x27;,&#x27;../images/big-neon-tower-tiny-square.jpg&#x27;,&#x27;../images/big-neon-tower-tiny-square.jpeg&#x27;]'
+                 alt="Big Neon Tower Tiny Square thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Big Neon Tower Tiny Square</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Big Neon Tower Tiny Square</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./big-tower-tiny-square.xml">
+        <article class="game-card" data-title="big tower tiny square">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/big-tower-tiny-square.xml.png&#x27;,&#x27;../images/big-tower-tiny-square.png&#x27;,&#x27;../images/big-tower-tiny-square.jpg&#x27;,&#x27;../images/big-tower-tiny-square.jpeg&#x27;]'
+                 alt="Big Tower Tiny Square thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Big Tower Tiny Square</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Big Tower Tiny Square</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./bl.xml">
+        <article class="game-card" data-title="bl">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/bl.xml.png&#x27;,&#x27;../images/bl.png&#x27;,&#x27;../images/bl.jpg&#x27;,&#x27;../images/bl.jpeg&#x27;]'
+                 alt="Bl thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Bl</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Bl</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./blb.xml">
+        <article class="game-card" data-title="blb">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/blb.xml.png&#x27;,&#x27;../images/blb.png&#x27;,&#x27;../images/blb.jpg&#x27;,&#x27;../images/blb.jpeg&#x27;]'
+                 alt="Blb thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Blb</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Blb</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./bloons5.xml">
+        <article class="game-card" data-title="bloons5">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/bloons5.xml.png&#x27;,&#x27;../images/bloons5.png&#x27;,&#x27;../images/bloons5.jpg&#x27;,&#x27;../images/bloons5.jpeg&#x27;]'
+                 alt="Bloons5 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Bloons5</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Bloons5</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./bobtherobber.xml">
+        <article class="game-card" data-title="bobtherobber">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/bobtherobber.xml.png&#x27;,&#x27;../images/bobtherobber.png&#x27;,&#x27;../images/bobtherobber.jpg&#x27;,&#x27;../images/bobtherobber.jpeg&#x27;]'
+                 alt="Bobtherobber thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Bobtherobber</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Bobtherobber</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./boxing-random.xml">
+        <article class="game-card" data-title="boxing random">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/boxing-random.xml.png&#x27;,&#x27;../images/boxing-random.png&#x27;,&#x27;../images/boxing-random.jpg&#x27;,&#x27;../images/boxing-random.jpeg&#x27;]'
+                 alt="Boxing Random thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Boxing Random</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Boxing Random</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./buckshot-roulette.xml">
+        <article class="game-card" data-title="buckshot roulette">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/buckshot-roulette.xml.png&#x27;,&#x27;../images/buckshot-roulette.png&#x27;,&#x27;../images/buckshot-roulette.jpg&#x27;,&#x27;../images/buckshot-roulette.jpeg&#x27;]'
+                 alt="Buckshot Roulette thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Buckshot Roulette</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Buckshot Roulette</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./burritobison2.xml">
+        <article class="game-card" data-title="burritobison2">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/burritobison2.xml.png&#x27;,&#x27;../images/burritobison2.png&#x27;,&#x27;../images/burritobison2.jpg&#x27;,&#x27;../images/burritobison2.jpeg&#x27;]'
+                 alt="Burritobison2 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Burritobison2</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Burritobison2</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./cannon-basketball-2.xml">
+        <article class="game-card" data-title="cannon basketball 2">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/cannon-basketball-2.xml.png&#x27;,&#x27;../images/cannon-basketball-2.png&#x27;,&#x27;../images/cannon-basketball-2.jpg&#x27;,&#x27;../images/cannon-basketball-2.jpeg&#x27;]'
+                 alt="Cannon Basketball 2 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Cannon Basketball 2</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Cannon Basketball 2</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./cannon-basketball.xml">
+        <article class="game-card" data-title="cannon basketball">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/cannon-basketball.xml.png&#x27;,&#x27;../images/cannon-basketball.png&#x27;,&#x27;../images/cannon-basketball.jpg&#x27;,&#x27;../images/cannon-basketball.jpeg&#x27;]'
+                 alt="Cannon Basketball thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Cannon Basketball</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Cannon Basketball</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./car-stunts.xml">
+        <article class="game-card" data-title="car stunts">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/car-stunts.xml.png&#x27;,&#x27;../images/car-stunts.png&#x27;,&#x27;../images/car-stunts.jpg&#x27;,&#x27;../images/car-stunts.jpeg&#x27;]'
+                 alt="Car Stunts thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Car Stunts</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Car Stunts</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./car.xml">
+        <article class="game-card" data-title="car">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/car.xml.png&#x27;,&#x27;../images/car.png&#x27;,&#x27;../images/car.jpg&#x27;,&#x27;../images/car.jpeg&#x27;]'
+                 alt="Car thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Car</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Car</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./clusterr.xml">
+        <article class="game-card" data-title="clusterr">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/clusterr.xml.png&#x27;,&#x27;../images/clusterr.png&#x27;,&#x27;../images/clusterr.jpg&#x27;,&#x27;../images/clusterr.jpeg&#x27;]'
+                 alt="Clusterr thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Clusterr</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Clusterr</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./cookie-clicker.xml">
+        <article class="game-card" data-title="cookie clicker">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/cookie-clicker.xml.png&#x27;,&#x27;../images/cookie-clicker.png&#x27;,&#x27;../images/cookie-clicker.jpg&#x27;,&#x27;../images/cookie-clicker.jpeg&#x27;]'
+                 alt="Cookie Clicker thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Cookie Clicker</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Cookie Clicker</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./coreball.xml">
+        <article class="game-card" data-title="coreball">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/coreball.xml.png&#x27;,&#x27;../images/coreball.png&#x27;,&#x27;../images/coreball.jpg&#x27;,&#x27;../images/coreball.jpeg&#x27;]'
+                 alt="Coreball thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Coreball</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Coreball</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./counter-strike.xml">
+        <article class="game-card" data-title="counter strike">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/counter-strike.xml.png&#x27;,&#x27;../images/counter-strike.png&#x27;,&#x27;../images/counter-strike.jpg&#x27;,&#x27;../images/counter-strike.jpeg&#x27;]'
+                 alt="Counter Strike thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Counter Strike</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Counter Strike</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./cubefield.xml">
+        <article class="game-card" data-title="cubefield">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/cubefield.xml.png&#x27;,&#x27;../images/cubefield.png&#x27;,&#x27;../images/cubefield.jpg&#x27;,&#x27;../images/cubefield.jpeg&#x27;]'
+                 alt="Cubefield thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Cubefield</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Cubefield</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./cut-the-rope.xml">
+        <article class="game-card" data-title="cut the rope">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/cut-the-rope.xml.png&#x27;,&#x27;../images/cut-the-rope.png&#x27;,&#x27;../images/cut-the-rope.jpg&#x27;,&#x27;../images/cut-the-rope.jpeg&#x27;]'
+                 alt="Cut The Rope thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Cut The Rope</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Cut The Rope</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./doom3d.xml">
+        <article class="game-card" data-title="doom3d">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/doom3d.xml.png&#x27;,&#x27;../images/doom3d.png&#x27;,&#x27;../images/doom3d.jpg&#x27;,&#x27;../images/doom3d.jpeg&#x27;]'
+                 alt="Doom3d thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Doom3d</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Doom3d</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./drawclimber.xml">
+        <article class="game-card" data-title="drawclimber">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/drawclimber.xml.png&#x27;,&#x27;../images/drawclimber.png&#x27;,&#x27;../images/drawclimber.jpg&#x27;,&#x27;../images/drawclimber.jpeg&#x27;]'
+                 alt="Drawclimber thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Drawclimber</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Drawclimber</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./drive-mad.xml">
+        <article class="game-card" data-title="drive mad">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/drive-mad.xml.png&#x27;,&#x27;../images/drive-mad.png&#x27;,&#x27;../images/drive-mad.jpg&#x27;,&#x27;../images/drive-mad.jpeg&#x27;]'
+                 alt="Drive Mad thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Drive Mad</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Drive Mad</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./drive.xml">
+        <article class="game-card" data-title="drive">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/drive.xml.png&#x27;,&#x27;../images/drive.png&#x27;,&#x27;../images/drive.jpg&#x27;,&#x27;../images/drive.jpeg&#x27;]'
+                 alt="Drive thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Drive</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Drive</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./emulator.xml">
+        <article class="game-card" data-title="emulator">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/emulator.xml.png&#x27;,&#x27;../images/emulator.png&#x27;,&#x27;../images/emulator.jpg&#x27;,&#x27;../images/emulator.jpeg&#x27;]'
+                 alt="Emulator thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Emulator</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Emulator</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./fbwg2.xml">
+        <article class="game-card" data-title="fireboy &amp; watergirl 2">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/fbwg2.xml.png&#x27;,&#x27;../images/fbwg2.png&#x27;,&#x27;../images/fbwg2.jpg&#x27;,&#x27;../images/fbwg2.jpeg&#x27;]'
+                 alt="Fireboy &amp; Watergirl 2 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Fireboy &amp; Watergirl 2</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Fireboy &amp; Watergirl 2</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./fbwg3.xml">
+        <article class="game-card" data-title="fireboy &amp; watergirl 3">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/fbwg3.xml.png&#x27;,&#x27;../images/fbwg3.png&#x27;,&#x27;../images/fbwg3.jpg&#x27;,&#x27;../images/fbwg3.jpeg&#x27;]'
+                 alt="Fireboy &amp; Watergirl 3 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Fireboy &amp; Watergirl 3</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Fireboy &amp; Watergirl 3</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./five-nights-at-freddys.xml">
+        <article class="game-card" data-title="five nights at freddys">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/five-nights-at-freddys.xml.png&#x27;,&#x27;../images/five-nights-at-freddys.png&#x27;,&#x27;../images/five-nights-at-freddys.jpg&#x27;,&#x27;../images/five-nights-at-freddys.jpeg&#x27;]'
+                 alt="Five Nights At Freddys thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Five Nights At Freddys</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Five Nights At Freddys</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./granny.xml">
+        <article class="game-card" data-title="granny">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/granny.xml.png&#x27;,&#x27;../images/granny.png&#x27;,&#x27;../images/granny.jpg&#x27;,&#x27;../images/granny.jpeg&#x27;]'
+                 alt="Granny thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Granny</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Granny</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./gunspin.xml">
+        <article class="game-card" data-title="gunspin">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/gunspin.xml.png&#x27;,&#x27;../images/gunspin.png&#x27;,&#x27;../images/gunspin.jpg&#x27;,&#x27;../images/gunspin.jpeg&#x27;]'
+                 alt="Gunspin thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Gunspin</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Gunspin</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./highwayracer2.xml">
+        <article class="game-card" data-title="highwayracer2">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/highwayracer2.xml.png&#x27;,&#x27;../images/highwayracer2.png&#x27;,&#x27;../images/highwayracer2.jpg&#x27;,&#x27;../images/highwayracer2.jpeg&#x27;]'
+                 alt="Highwayracer2 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Highwayracer2</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Highwayracer2</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./impossiblequiz.swf">
+        <article class="game-card" data-title="impossiblequiz">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/impossiblequiz.swf.png&#x27;,&#x27;../images/impossiblequiz.png&#x27;,&#x27;../images/impossiblequiz.jpg&#x27;,&#x27;../images/impossiblequiz.jpeg&#x27;]'
+                 alt="Impossiblequiz thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Impossiblequiz</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Impossiblequiz</h2>
+            <span class="type">.SWF file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./jetpack-joyride.xml">
+        <article class="game-card" data-title="jetpack joyride">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/jetpack-joyride.xml.png&#x27;,&#x27;../images/jetpack-joyride.png&#x27;,&#x27;../images/jetpack-joyride.jpg&#x27;,&#x27;../images/jetpack-joyride.jpeg&#x27;]'
+                 alt="Jetpack Joyride thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Jetpack Joyride</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Jetpack Joyride</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./johnny-trigger.xml">
+        <article class="game-card" data-title="johnny trigger">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/johnny-trigger.xml.png&#x27;,&#x27;../images/johnny-trigger.png&#x27;,&#x27;../images/johnny-trigger.jpg&#x27;,&#x27;../images/johnny-trigger.jpeg&#x27;]'
+                 alt="Johnny Trigger thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Johnny Trigger</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Johnny Trigger</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./journeydownhill.xml">
+        <article class="game-card" data-title="journeydownhill">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/journeydownhill.xml.png&#x27;,&#x27;../images/journeydownhill.png&#x27;,&#x27;../images/journeydownhill.jpg&#x27;,&#x27;../images/journeydownhill.jpeg&#x27;]'
+                 alt="Journeydownhill thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Journeydownhill</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Journeydownhill</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./line-rider.xml">
+        <article class="game-card" data-title="line rider">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/line-rider.xml.png&#x27;,&#x27;../images/line-rider.png&#x27;,&#x27;../images/line-rider.jpg&#x27;,&#x27;../images/line-rider.jpeg&#x27;]'
+                 alt="Line Rider thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Line Rider</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Line Rider</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./maio64.xml">
+        <article class="game-card" data-title="mario 64">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/maio64.xml.png&#x27;,&#x27;../images/maio64.png&#x27;,&#x27;../images/maio64.jpg&#x27;,&#x27;../images/maio64.jpeg&#x27;]'
+                 alt="Mario 64 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Mario 64</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Mario 64</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./mc.html">
+        <article class="game-card" data-title="minecraft">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/mc.html.png&#x27;,&#x27;../images/mc.png&#x27;,&#x27;../images/mc.jpg&#x27;,&#x27;../images/mc.jpeg&#x27;]'
+                 alt="Minecraft thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Minecraft</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Minecraft</h2>
+            <span class="type">.HTML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./mice.xml">
+        <article class="game-card" data-title="mice">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/mice.xml.png&#x27;,&#x27;../images/mice.png&#x27;,&#x27;../images/mice.jpg&#x27;,&#x27;../images/mice.jpeg&#x27;]'
+                 alt="Mice thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Mice</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Mice</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./monkey-mart.xml">
+        <article class="game-card" data-title="monkey mart">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/monkey-mart.xml.png&#x27;,&#x27;../images/monkey-mart.png&#x27;,&#x27;../images/monkey-mart.jpg&#x27;,&#x27;../images/monkey-mart.jpeg&#x27;]'
+                 alt="Monkey Mart thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Monkey Mart</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Monkey Mart</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./monster-tracks.xml">
+        <article class="game-card" data-title="monster tracks">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/monster-tracks.xml.png&#x27;,&#x27;../images/monster-tracks.png&#x27;,&#x27;../images/monster-tracks.jpg&#x27;,&#x27;../images/monster-tracks.jpeg&#x27;]'
+                 alt="Monster Tracks thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Monster Tracks</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Monster Tracks</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./moto-x3m-2.xml">
+        <article class="game-card" data-title="moto x3m 2">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/moto-x3m-2.xml.png&#x27;,&#x27;../images/moto-x3m-2.png&#x27;,&#x27;../images/moto-x3m-2.jpg&#x27;,&#x27;../images/moto-x3m-2.jpeg&#x27;]'
+                 alt="Moto X3m 2 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Moto X3m 2</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Moto X3m 2</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./moto-x3m-3.xml">
+        <article class="game-card" data-title="moto x3m 3">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/moto-x3m-3.xml.png&#x27;,&#x27;../images/moto-x3m-3.png&#x27;,&#x27;../images/moto-x3m-3.jpg&#x27;,&#x27;../images/moto-x3m-3.jpeg&#x27;]'
+                 alt="Moto X3m 3 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Moto X3m 3</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Moto X3m 3</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./moto-x3m-spooky.xml">
+        <article class="game-card" data-title="moto x3m spooky">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/moto-x3m-spooky.xml.png&#x27;,&#x27;../images/moto-x3m-spooky.png&#x27;,&#x27;../images/moto-x3m-spooky.jpg&#x27;,&#x27;../images/moto-x3m-spooky.jpeg&#x27;]'
+                 alt="Moto X3m Spooky thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Moto X3m Spooky</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Moto X3m Spooky</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./moto-x3m-winter.xml">
+        <article class="game-card" data-title="moto x3m winter">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/moto-x3m-winter.xml.png&#x27;,&#x27;../images/moto-x3m-winter.png&#x27;,&#x27;../images/moto-x3m-winter.jpg&#x27;,&#x27;../images/moto-x3m-winter.jpeg&#x27;]'
+                 alt="Moto X3m Winter thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Moto X3m Winter</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Moto X3m Winter</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./moto-x3m.xml">
+        <article class="game-card" data-title="moto x3m">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/moto-x3m.xml.png&#x27;,&#x27;../images/moto-x3m.png&#x27;,&#x27;../images/moto-x3m.jpg&#x27;,&#x27;../images/moto-x3m.jpeg&#x27;]'
+                 alt="Moto X3m thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Moto X3m</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Moto X3m</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./ninja-vs-evilcorp.xml">
+        <article class="game-card" data-title="ninja vs evilcorp">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/ninja-vs-evilcorp.xml.png&#x27;,&#x27;../images/ninja-vs-evilcorp.png&#x27;,&#x27;../images/ninja-vs-evilcorp.jpg&#x27;,&#x27;../images/ninja-vs-evilcorp.jpeg&#x27;]'
+                 alt="Ninja Vs Evilcorp thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Ninja Vs Evilcorp</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Ninja Vs Evilcorp</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./paper-io-2.xml">
+        <article class="game-card" data-title="paper io 2">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/paper-io-2.xml.png&#x27;,&#x27;../images/paper-io-2.png&#x27;,&#x27;../images/paper-io-2.jpg&#x27;,&#x27;../images/paper-io-2.jpeg&#x27;]'
+                 alt="Paper Io 2 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Paper Io 2</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Paper Io 2</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./retrobowlcollege.xml">
+        <article class="game-card" data-title="retrobowlcollege">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/retrobowlcollege.xml.png&#x27;,&#x27;../images/retrobowlcollege.png&#x27;,&#x27;../images/retrobowlcollege.jpg&#x27;,&#x27;../images/retrobowlcollege.jpeg&#x27;]'
+                 alt="Retrobowlcollege thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Retrobowlcollege</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Retrobowlcollege</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./sandboxels.xml">
+        <article class="game-card" data-title="sandboxels">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/sandboxels.xml.png&#x27;,&#x27;../images/sandboxels.png&#x27;,&#x27;../images/sandboxels.jpg&#x27;,&#x27;../images/sandboxels.jpeg&#x27;]'
+                 alt="Sandboxels thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Sandboxels</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Sandboxels</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./stickman-hook.xml">
+        <article class="game-card" data-title="stickman hook">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/stickman-hook.xml.png&#x27;,&#x27;../images/stickman-hook.png&#x27;,&#x27;../images/stickman-hook.jpg&#x27;,&#x27;../images/stickman-hook.jpeg&#x27;]'
+                 alt="Stickman Hook thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Stickman Hook</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Stickman Hook</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./swf.xml">
+        <article class="game-card" data-title="flash games">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/swf.xml.png&#x27;,&#x27;../images/swf.png&#x27;,&#x27;../images/swf.jpg&#x27;,&#x27;../images/swf.jpeg&#x27;]'
+                 alt="Flash Games thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Flash Games</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Flash Games</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./swordsandsandals2.swf">
+        <article class="game-card" data-title="swordsandsandals2">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/swordsandsandals2.swf.png&#x27;,&#x27;../images/swordsandsandals2.png&#x27;,&#x27;../images/swordsandsandals2.jpg&#x27;,&#x27;../images/swordsandsandals2.jpeg&#x27;]'
+                 alt="Swordsandsandals2 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Swordsandsandals2</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Swordsandsandals2</h2>
+            <span class="type">.SWF file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./temple-run-2.xml">
+        <article class="game-card" data-title="temple run 2">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/temple-run-2.xml.png&#x27;,&#x27;../images/temple-run-2.png&#x27;,&#x27;../images/temple-run-2.jpg&#x27;,&#x27;../images/temple-run-2.jpeg&#x27;]'
+                 alt="Temple Run 2 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Temple Run 2</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Temple Run 2</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./the-worlds-hardest-game-3.xml">
+        <article class="game-card" data-title="the worlds hardest game 3">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/the-worlds-hardest-game-3.xml.png&#x27;,&#x27;../images/the-worlds-hardest-game-3.png&#x27;,&#x27;../images/the-worlds-hardest-game-3.jpg&#x27;,&#x27;../images/the-worlds-hardest-game-3.jpeg&#x27;]'
+                 alt="The Worlds Hardest Game 3 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">The Worlds Hardest Game 3</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>The Worlds Hardest Game 3</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./the-worlds-hardest-game-4.xml">
+        <article class="game-card" data-title="the worlds hardest game 4">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/the-worlds-hardest-game-4.xml.png&#x27;,&#x27;../images/the-worlds-hardest-game-4.png&#x27;,&#x27;../images/the-worlds-hardest-game-4.jpg&#x27;,&#x27;../images/the-worlds-hardest-game-4.jpeg&#x27;]'
+                 alt="The Worlds Hardest Game 4 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">The Worlds Hardest Game 4</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>The Worlds Hardest Game 4</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./the-worlds-hardest-game.xml">
+        <article class="game-card" data-title="the worlds hardest game">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/the-worlds-hardest-game.xml.png&#x27;,&#x27;../images/the-worlds-hardest-game.png&#x27;,&#x27;../images/the-worlds-hardest-game.jpg&#x27;,&#x27;../images/the-worlds-hardest-game.jpeg&#x27;]'
+                 alt="The Worlds Hardest Game thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">The Worlds Hardest Game</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>The Worlds Hardest Game</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./this-is-the-only-level-2.xml">
+        <article class="game-card" data-title="this is the only level 2">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/this-is-the-only-level-2.xml.png&#x27;,&#x27;../images/this-is-the-only-level-2.png&#x27;,&#x27;../images/this-is-the-only-level-2.jpg&#x27;,&#x27;../images/this-is-the-only-level-2.jpeg&#x27;]'
+                 alt="This Is The Only Level 2 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">This Is The Only Level 2</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>This Is The Only Level 2</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./this-is-the-only-level.xml">
+        <article class="game-card" data-title="this is the only level">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/this-is-the-only-level.xml.png&#x27;,&#x27;../images/this-is-the-only-level.png&#x27;,&#x27;../images/this-is-the-only-level.jpg&#x27;,&#x27;../images/this-is-the-only-level.jpeg&#x27;]'
+                 alt="This Is The Only Level thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">This Is The Only Level</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>This Is The Only Level</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./tiny-fishing.xml">
+        <article class="game-card" data-title="tiny fishing">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/tiny-fishing.xml.png&#x27;,&#x27;../images/tiny-fishing.png&#x27;,&#x27;../images/tiny-fishing.jpg&#x27;,&#x27;../images/tiny-fishing.jpeg&#x27;]'
+                 alt="Tiny Fishing thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Tiny Fishing</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Tiny Fishing</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./tomb-of-the-mask.xml">
+        <article class="game-card" data-title="tomb of the mask">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/tomb-of-the-mask.xml.png&#x27;,&#x27;../images/tomb-of-the-mask.png&#x27;,&#x27;../images/tomb-of-the-mask.jpg&#x27;,&#x27;../images/tomb-of-the-mask.jpeg&#x27;]'
+                 alt="Tomb Of The Mask thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Tomb Of The Mask</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Tomb Of The Mask</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./toss-the-turtle.xml">
+        <article class="game-card" data-title="toss the turtle">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/toss-the-turtle.xml.png&#x27;,&#x27;../images/toss-the-turtle.png&#x27;,&#x27;../images/toss-the-turtle.jpg&#x27;,&#x27;../images/toss-the-turtle.jpeg&#x27;]'
+                 alt="Toss The Turtle thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Toss The Turtle</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Toss The Turtle</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./tube-jumpers.xml">
+        <article class="game-card" data-title="tube jumpers">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/tube-jumpers.xml.png&#x27;,&#x27;../images/tube-jumpers.png&#x27;,&#x27;../images/tube-jumpers.jpg&#x27;,&#x27;../images/tube-jumpers.jpeg&#x27;]'
+                 alt="Tube Jumpers thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Tube Jumpers</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Tube Jumpers</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./vex8.xml">
+        <article class="game-card" data-title="vex8">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/vex8.xml.png&#x27;,&#x27;../images/vex8.png&#x27;,&#x27;../images/vex8.jpg&#x27;,&#x27;../images/vex8.jpeg&#x27;]'
+                 alt="Vex8 thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Vex8</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Vex8</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+      <a class="game-link" href="./words.xml">
+        <article class="game-card" data-title="words">
+          <div class="thumb">
+            <img src="" data-candidates='[&#x27;../images/words.xml.png&#x27;,&#x27;../images/words.png&#x27;,&#x27;../images/words.jpg&#x27;,&#x27;../images/words.jpeg&#x27;]'
+                 alt="Words thumbnail"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="%23151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Arial" font-size="30">Words</text></svg>')">
+            <span class="play">▶</span>
+          </div>
+          <div class="card-info">
+            <h2>Words</h2>
+            <span class="type">.XML file</span>
+          </div>
+        </article>
+      </a>
+    
+</main>
+
+<footer>Game Hub • 111 linked entries</footer>
+
+<script>
+const cards = [...document.querySelectorAll(".game-card")];
+const search = document.getElementById("searchBar");
+const stats = document.getElementById("stats");
+const images = [...document.querySelectorAll(".thumb img")];
+
+images.forEach(img => {
+  let candidates = [];
+  try { candidates = JSON.parse(img.dataset.candidates.replaceAll("'", '"')); } catch {}
+  let i = 0;
+  const next = () => {
+    if (i < candidates.length) img.src = candidates[i++];
+  };
+  img.onerror = () => {
+    img.onerror = null;
+    img.src = "data:image/svg+xml;charset=UTF-8," +
+      encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="100%" height="100%" fill="#151a2b"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="Arial" font-size="30">No Thumbnail</text></svg>');
+  };
+  next();
+});
+
+function update() {
+  const q = search.value.trim().toLowerCase();
+  let shown = 0;
+  cards.forEach(card => {
+    const match = !q || card.dataset.title.includes(q);
+    card.parentElement.style.display = match ? "" : "none";
+    if (match) shown++;
+  });
+  stats.textContent = `${shown} of ${cards.length} games/files shown`;
+}
+search.addEventListener("input", update);
+update();
+</script>
+</body>
+</html>
